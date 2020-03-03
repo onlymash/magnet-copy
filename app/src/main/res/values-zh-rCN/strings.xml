@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Magnet Copy</string>
+    <string name="copy_to_magnet">复制为磁力链</string>
+    <string name="error_string">请选择正确的文本。</string>
+</resources>

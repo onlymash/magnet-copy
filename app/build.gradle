@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        release {
+            Properties localProps = new Properties()
+            localProps.load(new FileInputStream(file('../local.properties')))
+
+            storeFile file(localProps.getProperty('RELEASE_STORE_FILE'))
+            keyAlias localProps.getProperty('RELEASE_KEY_ALIAS')
+            storePassword localProps.getProperty('RELEASE_KEY_PASSWORD')
+            keyPassword localProps.getProperty('RELEASE_STORE_PASSWORD')
+        }
+    }
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
+    defaultConfig {
+        applicationId "com.fiepi.magnet"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1003
+        versionName "1.0.3"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2-alpha04'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha04'
+}
